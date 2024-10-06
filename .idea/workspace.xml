@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="296a523b-460c-4b90-9968-6a71b7cac826" name="Changes" comment="recebendo os preços e salvando uma copia do html">
+    <list default="true" id="296a523b-460c-4b90-9968-6a71b7cac826" name="Changes" comment="Progresso com BeautifulSoup salvo em old - inicio com scrapy">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -86,7 +86,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728246055389</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Progresso com BeautifulSoup salvo em old - inicio com scrapy">
+      <option name="closed" value="true" />
+      <created>1728252042440</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1728252042440</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -115,6 +123,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="inicio" />
     <MESSAGE value="recebendo os preços e salvando uma copia do html" />
-    <option name="LAST_COMMIT_MESSAGE" value="recebendo os preços e salvando uma copia do html" />
+    <MESSAGE value="Progresso com BeautifulSoup salvo em old - inicio com scrapy" />
+    <option name="LAST_COMMIT_MESSAGE" value="Progresso com BeautifulSoup salvo em old - inicio com scrapy" />
   </component>
 </project>

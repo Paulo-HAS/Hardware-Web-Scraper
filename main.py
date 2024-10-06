@@ -1,35 +1,30 @@
-import requests
-import csv
-from pymongo import MongoClient
-import sys
+import scrapy
+from urllib.parse import urlencode
 from bs4 import BeautifulSoup
 
-# Classe do produto
+def get_scraperapi_url(url):
+    APIKEY = "YOUR_SCRAPERAPI_KEY"
+    payload = {'api_key': APIKEY, 'url': url, 'render': True}
+    proxy_url = 'http://api.scraperapi.com/?' + urlencode(payload)
+    return proxy_url
 
-class Product:
-    def __init__(self, name):
-        self.name = name
-    def __str__(self):
-        return f"{self.name}"
+class ZaraProductSpider(scrapy.Spider):
+    name = "zara_products"
+    def start_requests(self):
+        urls = [
+            'https://www.zara.com/ww/en/man-shirts-l737.html?v1=2351464',
+            'https://www.zara.com/ww/en/man-shirts-l737.html?v1=2351464&page=2',
+            'https://www.zara.com/ww/en/man-shirts-l737.html?v1=2351464&page=3'
+        ]
+        for url in urls:
+            yield scrapy.Request(url=get_scraperapi_url(url), callback=self.parse)
 
-# Função de busca
-
-def prodSearch(name, store):
-    if store.lower() == 'kabum':
-        req = requests.get('https://www.kabum.com.br/busca/{}'.format(name.replace(' ','-')))
-    else:
-        print('Site inválido!')
-    soup = BeautifulSoup(req.text, 'html.parser')
-    with open('soup.html', "w", encoding="utf-8") as f:
-        f.write(req.text)
-    all_tag_span = soup.find_all('span')
-    for tag_span in all_tag_span:
-        class_span = tag_span.get('class')
-        if 'sc-' in str(class_span):
-            if tag_span.text:
-                print(tag_span.text)
-
-############ MAIN
-name = input('Hardware a ser buscado:')
-product = Product(name)
-prodSearch(product.name, 'kabum')
+    def parse(self, response):
+        soup = BeautifulSoup(response.body, 'html.parser')
+        for product in soup.select('div.product-grid-product-info'):
+            product_name = product.select_one('h2').get_text(strip=True) if product.select_one('h2') else None
+            price = product.select_one('span.money-amount__main').get_text(strip=True) if product.select_one('span.money-amount__main') else None
+            yield {
+                'product_name': product_name,
+                'price': price,
+            }
